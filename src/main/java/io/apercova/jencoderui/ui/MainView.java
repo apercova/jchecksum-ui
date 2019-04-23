@@ -7,9 +7,14 @@ package io.apercova.jencoderui.ui;
 
 import io.apercova.jencoderui.controller.MainViewController;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -22,14 +27,16 @@ public class MainView extends javax.swing.JFrame {
      * Creates new form MainView
      */
     public MainView() {
-        initComponents();
+        
+        initComponents();        
+        initCustomComponents();
         this.controller = new MainViewController(this);
-        this.btnDigest.setActionCommand(MainViewController.DIGEST_AC);
-        this.btnEncode.setActionCommand(MainViewController.ENCODE_AC);
-        this.btnCopyResult.setActionCommand(MainViewController.COPY_RESULT_AC);
+        this.chkFile.addActionListener(this.controller);
+        this.btnFileChooser.addActionListener(this.controller);
         this.btnDigest.addActionListener(this.controller);
         this.btnEncode.addActionListener(this.controller);
         this.btnCopyResult.addActionListener(this.controller);
+        
     }
 
     /**
@@ -41,8 +48,6 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollSource = new javax.swing.JScrollPane();
-        txtSource = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         lblAlg = new javax.swing.JLabel();
         lblEncoding = new javax.swing.JLabel();
@@ -53,16 +58,21 @@ public class MainView extends javax.swing.JFrame {
         cmbAlg = new javax.swing.JComboBox();
         cmbEncoding = new javax.swing.JComboBox();
         cmbCharset = new javax.swing.JComboBox();
+        btnFileChooser = new javax.swing.JButton();
+        chkFile = new javax.swing.JCheckBox();
+        lblSource = new javax.swing.JLabel();
+        btnCopySource = new javax.swing.JButton();
+        btnClSource = new javax.swing.JButton();
+        lblResult = new javax.swing.JLabel();
+        btnClResult = new javax.swing.JButton();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        scrollSource = new javax.swing.JScrollPane();
+        txtSource = new javax.swing.JTextArea();
         scrollTarget = new javax.swing.JScrollPane();
         txtTarget = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1027, 768));
         setSize(new java.awt.Dimension(800, 600));
-
-        txtSource.setColumns(20);
-        txtSource.setRows(5);
-        scrollSource.setViewportView(txtSource);
 
         lblAlg.setText("Algorithm");
 
@@ -82,6 +92,20 @@ public class MainView extends javax.swing.JFrame {
 
         cmbCharset.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnFileChooser.setText("Select ...");
+
+        chkFile.setText("File");
+
+        lblSource.setText("Source:");
+
+        btnCopySource.setText("Copy");
+
+        btnClSource.setText("Clear");
+
+        lblResult.setText("Result:");
+
+        btnClResult.setText("Clear");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,16 +119,40 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(lblCharset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbCharset, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnEncode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chkFile)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnDigest, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnCopyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDigest, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnCopyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEncode, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                            .addComponent(btnClResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblResult)
+                            .addComponent(lblSource))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCopySource, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnClSource, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkFile)
+                    .addComponent(btnFileChooser))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbAlg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,18 +164,39 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(lblCharset)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbCharset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEncode)
-                    .addComponent(btnDigest))
-                .addGap(104, 104, 104)
-                .addComponent(btnCopyResult)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDigest)
+                    .addComponent(btnEncode))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSource)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCopySource)
+                    .addComponent(btnClSource))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblResult)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClResult)
+                    .addComponent(btnCopyResult))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
+
+        jSplitPane1.setDividerLocation(280);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        txtSource.setColumns(20);
+        txtSource.setRows(5);
+        scrollSource.setViewportView(txtSource);
+
+        jSplitPane1.setTopComponent(scrollSource);
 
         txtTarget.setColumns(20);
         txtTarget.setRows(5);
         scrollTarget.setViewportView(txtTarget);
+
+        jSplitPane1.setRightComponent(scrollTarget);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,26 +204,32 @@ public class MainView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollSource, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
-                    .addComponent(scrollTarget))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollSource, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addComponent(jSplitPane1)
                 .addContainerGap())
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initCustomComponents() {
+        this.chkFile.setActionCommand(MainViewController.FILEC_CK);
+        this.btnFileChooser.setActionCommand(MainViewController.FILEC_AC);
+        this.btnFileChooser.setEnabled(false);
+        this.btnDigest.setActionCommand(MainViewController.DIGEST_AC);
+        this.btnEncode.setActionCommand(MainViewController.ENCODE_AC);
+        this.btnCopyResult.setActionCommand(MainViewController.COPY_RESULT_AC);
+        this.fcSource = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    }
+    
     public JTextArea getTxtSource() {
         return txtSource;
     }
@@ -175,6 +250,14 @@ public class MainView extends javax.swing.JFrame {
         return lblEncoding;
     }
 
+    public JLabel getLblSource() {
+        return lblSource;
+    }
+
+    public JLabel getLblResult() {
+        return lblResult;
+    }
+
     public JComboBox getCmbAlg() {
         return cmbAlg;
     }
@@ -187,6 +270,14 @@ public class MainView extends javax.swing.JFrame {
         return cmbEncoding;
     }
 
+    public JCheckBox getChkFile() {
+        return chkFile;
+    }
+
+    public JButton getBtnFileChooser() {
+        return btnFileChooser;
+    }
+
     public JButton getBtnEncode() {
         return btnEncode;
     }
@@ -195,8 +286,24 @@ public class MainView extends javax.swing.JFrame {
         return btnDigest;
     }
 
+    public JFileChooser getFcSource() {
+        return fcSource;
+    }
+    
+    public JButton getBtnCopySource() {
+        return btnCopySource;
+    }
+
+    public JButton getBtnClSource() {
+        return btnClSource;
+    }
+    
     public JButton getBtnCopyResult() {
         return btnCopyResult;
+    }
+
+    public JButton getBtnClResult() {
+        return btnClResult;
     }
     
     /**
@@ -209,19 +316,20 @@ public class MainView extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -235,19 +343,28 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClResult;
+    private javax.swing.JButton btnClSource;
     private javax.swing.JButton btnCopyResult;
+    private javax.swing.JButton btnCopySource;
     private javax.swing.JButton btnDigest;
     private javax.swing.JButton btnEncode;
+    private javax.swing.JButton btnFileChooser;
+    private javax.swing.JCheckBox chkFile;
     private javax.swing.JComboBox cmbAlg;
     private javax.swing.JComboBox cmbCharset;
     private javax.swing.JComboBox cmbEncoding;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblAlg;
     private javax.swing.JLabel lblCharset;
     private javax.swing.JLabel lblEncoding;
+    private javax.swing.JLabel lblResult;
+    private javax.swing.JLabel lblSource;
     private javax.swing.JScrollPane scrollSource;
     private javax.swing.JScrollPane scrollTarget;
     private javax.swing.JTextArea txtSource;
     private javax.swing.JTextArea txtTarget;
     // End of variables declaration//GEN-END:variables
+    private javax.swing.JFileChooser fcSource;
 }

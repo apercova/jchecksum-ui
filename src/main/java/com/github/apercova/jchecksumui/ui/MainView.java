@@ -27,6 +27,9 @@ import javax.swing.filechooser.FileSystemView;
  */
 public class MainView extends javax.swing.JFrame {
 
+    private final static String AUTHOR = "@apercova";
+    private final static String VERSION = "1.0.1904";
+    
     private Image IMAGE_HASHTAG;
     private Image IMAGE_ENCODE;
     private Image IMAGE_DOCUMENT;
@@ -79,6 +82,7 @@ public class MainView extends javax.swing.JFrame {
         btnClSource = new javax.swing.JButton();
         lblResult = new javax.swing.JLabel();
         btnClResult = new javax.swing.JButton();
+        lblVersion = new javax.swing.JLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
         scrollSource = new javax.swing.JScrollPane();
         txtSource = new javax.swing.JTextArea();
@@ -131,19 +135,24 @@ public class MainView extends javax.swing.JFrame {
         btnClResult.setText("Clear");
         btnClResult.setToolTipText("Clear result");
 
+        lblVersion.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAlg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbAlg, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblEncoding, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbEncoding, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblCharset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbCharset, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblVersion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblAlg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbAlg, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEncoding, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbEncoding, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCharset, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbCharset, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnDigest, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,19 +164,19 @@ public class MainView extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEncode, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnClResult, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCopySource, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClSource, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblResult)
-                            .addComponent(lblSource))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(chkFile)
                         .addGap(18, 18, 18)
-                        .addComponent(btnFileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnFileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCopySource, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnClSource, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblResult)
+                            .addComponent(lblSource))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,36 +185,38 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chkFile)
-                    .addComponent(btnFileChooser))
+                    .addComponent(btnFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbAlg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbAlg, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblEncoding)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbEncoding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbEncoding, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblCharset)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbCharset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbCharset, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDigest)
-                    .addComponent(btnEncode))
+                    .addComponent(btnDigest, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEncode, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblSource)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCopySource)
-                    .addComponent(btnClSource))
+                    .addComponent(btnCopySource, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClSource, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblResult)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClResult)
-                    .addComponent(btnCopyResult))
-                .addContainerGap(265, Short.MAX_VALUE))
+                    .addComponent(btnClResult, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCopyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addComponent(lblVersion)
+                .addContainerGap())
         );
 
         jSplitPane1.setDividerLocation(280);
@@ -282,39 +293,45 @@ public class MainView extends javax.swing.JFrame {
 
         this.btnFileChooser.setActionCommand(MainViewController.CMD_FILEC);
         this.btnFileChooser.setEnabled(false);
-        this.btnFileChooser.setIcon(new ImageIcon(this.IMAGE_DOCUMENT.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnFileChooser.setIcon(new ImageIcon(this.IMAGE_DOCUMENT.getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING)));
         this.btnFileChooser.setText(this.messages.getString("btn.file.text"));
         this.btnFileChooser.setToolTipText(this.messages.getString("btn.file.tooltip"));
 
         this.btnDigest.setActionCommand(MainViewController.CMD_DIGEST);
-        this.btnDigest.setIcon(new ImageIcon(this.IMAGE_HASHTAG.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnDigest.setIcon(new ImageIcon(this.IMAGE_HASHTAG.getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING)));
         this.btnDigest.setText(this.messages.getString("btn.digest.text"));
         this.btnDigest.setToolTipText(this.messages.getString("btn.digest.tooltip"));
 
         this.btnEncode.setActionCommand(MainViewController.CMD_ENCODE);
-        this.btnEncode.setIcon(new ImageIcon(this.IMAGE_ENCODE.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnEncode.setIcon(new ImageIcon(this.IMAGE_ENCODE.getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING)));
         this.btnEncode.setText(this.messages.getString("btn.encode.text"));
         this.btnEncode.setToolTipText(this.messages.getString("btn.encode.tooltip"));
 
         this.btnCopySource.setActionCommand(MainViewController.CMD_COPY_SOURCE);
-        this.btnCopySource.setIcon(new ImageIcon(this.IMAGE_COPY.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnCopySource.setIcon(new ImageIcon(this.IMAGE_COPY.getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING)));
         this.btnCopySource.setText(this.messages.getString("btn.copy.source.text"));
         this.btnCopySource.setToolTipText(this.messages.getString("btn.copy.source.tooltip"));
 
         this.btnCopyResult.setActionCommand(MainViewController.CMD_COPY_RESULT);
-        this.btnCopyResult.setIcon(new ImageIcon(this.IMAGE_COPY.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnCopyResult.setIcon(new ImageIcon(this.IMAGE_COPY.getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING)));
         this.btnCopyResult.setText(this.messages.getString("btn.copy.result.text"));
         this.btnCopyResult.setToolTipText(this.messages.getString("btn.copy.result.tooltip"));
 
         this.btnClSource.setActionCommand(MainViewController.CMD_CLEAR_SOURCE);
-        this.btnClSource.setIcon(new ImageIcon(this.IMAGE_ERASER.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnClSource.setIcon(new ImageIcon(this.IMAGE_ERASER.getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING)));
         this.btnClSource.setText(this.messages.getString("btn.clear.source.text"));
         this.btnClSource.setToolTipText(this.messages.getString("btn.clear.source.tooltip"));
 
         this.btnClResult.setActionCommand(MainViewController.CMD_CLEAR_RESULT);
-        this.btnClResult.setIcon(new ImageIcon(this.IMAGE_ERASER.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnClResult.setIcon(new ImageIcon(this.IMAGE_ERASER.getScaledInstance(24, 24, Image.SCALE_AREA_AVERAGING)));
         this.btnClResult.setText(this.messages.getString("btn.clear.result.text"));
         this.btnClResult.setToolTipText(this.messages.getString("btn.clear.result.tooltip"));
+        
+        this.lblSource.setText(this.messages.getString("label.source.label"));
+        this.lblResult.setText(this.messages.getString("label.result.label"));
+        
+        this.lblVersion.setText(String.format("Version %s | by %s", VERSION, AUTHOR));
+        this.lblVersion.setToolTipText(String.format("Version %s | by %s", VERSION, AUTHOR));
     }
 
     /**
@@ -416,6 +433,10 @@ public class MainView extends javax.swing.JFrame {
         return btnClResult;
     }
 
+    public JLabel getLblVersion() {
+        return lblVersion;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -471,6 +492,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblEncoding;
     private javax.swing.JLabel lblResult;
     private javax.swing.JLabel lblSource;
+    private javax.swing.JLabel lblVersion;
     private javax.swing.JScrollPane scrollSource;
     private javax.swing.JScrollPane scrollTarget;
     private javax.swing.JTextArea txtSource;

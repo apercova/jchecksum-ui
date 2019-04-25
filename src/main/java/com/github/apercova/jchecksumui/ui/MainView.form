@@ -59,27 +59,27 @@
                       <Component id="cmbEncoding" alignment="0" max="32767" attributes="0"/>
                       <Component id="lblCharset" alignment="0" max="32767" attributes="0"/>
                       <Component id="cmbCharset" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="chkFile" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnFileChooser" min="-2" pref="80" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="btnDigest" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="btnDigest" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="btnCopyResult" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="btnCopyResult" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnEncode" pref="80" max="32767" attributes="0"/>
-                              <Component id="btnClResult" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnEncode" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="btnClResult" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnCopySource" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnClSource" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -89,9 +89,9 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnCopySource" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnClSource" max="32767" attributes="0"/>
+                          <Component id="chkFile" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnFileChooser" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -160,17 +160,20 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnEncode">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Encode"/>
+            <Property name="text" type="java.lang.String" value="Enc"/>
+            <Property name="toolTipText" type="java.lang.String" value="Encode"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnDigest">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Digest"/>
+            <Property name="text" type="java.lang.String" value="Hash"/>
+            <Property name="toolTipText" type="java.lang.String" value="Hash"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnCopyResult">
           <Properties>
             <Property name="text" type="java.lang.String" value="Copy"/>
+            <Property name="toolTipText" type="java.lang.String" value="Copy result"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbAlg">
@@ -178,6 +181,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot; })" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Hash algorithm"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
@@ -188,6 +192,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot; })" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Encoding"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
@@ -198,6 +203,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot; })" type="code"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Charset"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
@@ -206,11 +212,13 @@
         <Component class="javax.swing.JButton" name="btnFileChooser">
           <Properties>
             <Property name="text" type="java.lang.String" value="Select ..."/>
+            <Property name="toolTipText" type="java.lang.String" value="Select a file"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkFile">
           <Properties>
             <Property name="text" type="java.lang.String" value="File"/>
+            <Property name="toolTipText" type="java.lang.String" value="Select a file"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSource">
@@ -221,11 +229,13 @@
         <Component class="javax.swing.JButton" name="btnCopySource">
           <Properties>
             <Property name="text" type="java.lang.String" value="Copy"/>
+            <Property name="toolTipText" type="java.lang.String" value="Copy source"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnClSource">
           <Properties>
             <Property name="text" type="java.lang.String" value="Clear"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clear source"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblResult">
@@ -236,6 +246,7 @@
         <Component class="javax.swing.JButton" name="btnClResult">
           <Properties>
             <Property name="text" type="java.lang.String" value="Clear"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clear result"/>
           </Properties>
         </Component>
       </SubComponents>

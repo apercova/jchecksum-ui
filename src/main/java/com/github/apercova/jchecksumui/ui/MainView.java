@@ -1,11 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package io.apercova.jencoderui.ui;
+package com.github.apercova.jchecksumui.ui;
 
-import io.apercova.jencoderui.controller.MainViewController;
+import com.github.apercova.jchecksumui.controller.MainViewController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -17,26 +17,40 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileSystemView;
 
 /**
+ * Main view class
  *
- * @author alonperezext
+ * @author
+ * <a href="https://twitter.com/apercova" target="_blank">{@literal @}apercova</a>
+ * <a href="https://github.com/apercova" target="_blank">https://github.com/apercova</a>
+ * @since 1.0.1904
+ *
  */
 public class MainView extends javax.swing.JFrame {
 
-    private final MainViewController controller;
+    private Image IMAGE_HASHTAG;
+    private Image IMAGE_ENCODE;
+    private Image IMAGE_DOCUMENT;
+    private Image IMAGE_COPY;
+    private Image IMAGE_ERASER;
+    private MainViewController controller;
+    private ResourceBundle messages;
+
     /**
      * Creates new form MainView
      */
     public MainView() {
-        
-        initComponents();        
+        configlanguage();
+        loadImages();
+        initComponents();
         initCustomComponents();
-        this.controller = new MainViewController(this);
-        this.chkFile.addActionListener(this.controller);
-        this.btnFileChooser.addActionListener(this.controller);
-        this.btnDigest.addActionListener(this.controller);
-        this.btnEncode.addActionListener(this.controller);
-        this.btnCopyResult.addActionListener(this.controller);
-        
+        initListener();
+    }
+
+    /**
+     * Configure language
+     */
+    private void configlanguage() {
+        this.messages = ResourceBundle.getBundle(MainViewController.MESSAGE_BOUNDLE, Locale.getDefault());
     }
 
     /**
@@ -80,31 +94,42 @@ public class MainView extends javax.swing.JFrame {
 
         lblCharset.setText("Charset");
 
-        btnEncode.setText("Encode");
+        btnEncode.setText("Enc");
+        btnEncode.setToolTipText("Encode");
 
-        btnDigest.setText("Digest");
+        btnDigest.setText("Hash");
+        btnDigest.setToolTipText("Hash");
 
         btnCopyResult.setText("Copy");
+        btnCopyResult.setToolTipText("Copy result");
 
         cmbAlg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbAlg.setToolTipText("Hash algorithm");
 
         cmbEncoding.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbEncoding.setToolTipText("Encoding");
 
         cmbCharset.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbCharset.setToolTipText("Charset");
 
         btnFileChooser.setText("Select ...");
+        btnFileChooser.setToolTipText("Select a file");
 
         chkFile.setText("File");
+        chkFile.setToolTipText("Select a file");
 
         lblSource.setText("Source:");
 
         btnCopySource.setText("Copy");
+        btnCopySource.setToolTipText("Copy source");
 
         btnClSource.setText("Clear");
+        btnClSource.setToolTipText("Clear source");
 
         lblResult.setText("Result:");
 
         btnClResult.setText("Clear");
+        btnClResult.setToolTipText("Clear result");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,31 +143,31 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(cmbEncoding, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblCharset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbCharset, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(chkFile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnDigest, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDigest, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCopyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnCopyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEncode, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                            .addComponent(btnClResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnEncode, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClResult, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCopySource, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnClSource, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblResult)
                             .addComponent(lblSource))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCopySource, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClSource, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(chkFile)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -220,16 +245,101 @@ public class MainView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initCustomComponents() {
-        this.chkFile.setActionCommand(MainViewController.FILEC_CK);
-        this.btnFileChooser.setActionCommand(MainViewController.FILEC_AC);
-        this.btnFileChooser.setEnabled(false);
-        this.btnDigest.setActionCommand(MainViewController.DIGEST_AC);
-        this.btnEncode.setActionCommand(MainViewController.ENCODE_AC);
-        this.btnCopyResult.setActionCommand(MainViewController.COPY_RESULT_AC);
-        this.fcSource = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    /**
+     * Load image icons.
+     */
+    private void loadImages() {
+        this.IMAGE_HASHTAG = Toolkit.getDefaultToolkit().createImage(
+                this.getClass().getResource("/com/github/apercova/jchecksumui/ui/icons/hashtag.png"));
+        this.IMAGE_ENCODE = Toolkit.getDefaultToolkit().createImage(
+                this.getClass().getResource("/com/github/apercova/jchecksumui/ui/icons/encode.png"));
+        this.IMAGE_DOCUMENT = Toolkit.getDefaultToolkit().createImage(
+                this.getClass().getResource("/com/github/apercova/jchecksumui/ui/icons/document.png"));
+        this.IMAGE_COPY = Toolkit.getDefaultToolkit().createImage(
+                this.getClass().getResource("/com/github/apercova/jchecksumui/ui/icons/copy.png"));
+        this.IMAGE_ERASER = Toolkit.getDefaultToolkit().createImage(
+                this.getClass().getResource("/com/github/apercova/jchecksumui/ui/icons/eraser.png"));
     }
-    
+
+    /**
+     * Init customo components.
+     */
+    private void initCustomComponents() {
+        this.setTitle(this.messages.getString("app.title"));
+        this.setIconImage(this.IMAGE_HASHTAG);
+
+        this.fcSource = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+        this.chkFile.setActionCommand(MainViewController.CMD_FILEC_CK);
+        this.chkFile.setToolTipText(this.messages.getString("chk.file.tooltip"));
+
+        this.lblAlg.setText(this.messages.getString("cmb.alg.label"));
+        this.cmbAlg.setToolTipText(this.messages.getString("cmb.alg.tooltip"));
+        this.lblCharset.setText(this.messages.getString("cmb.charset.label"));
+        this.cmbCharset.setToolTipText(this.messages.getString("cmb.charset.tooltip"));
+        this.lblEncoding.setText(this.messages.getString("cmb.encoding.label"));
+        this.cmbEncoding.setToolTipText(this.messages.getString("cmb.encoding.tooltip"));
+
+        this.btnFileChooser.setActionCommand(MainViewController.CMD_FILEC);
+        this.btnFileChooser.setEnabled(false);
+        this.btnFileChooser.setIcon(new ImageIcon(this.IMAGE_DOCUMENT.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnFileChooser.setText(this.messages.getString("btn.file.text"));
+        this.btnFileChooser.setToolTipText(this.messages.getString("btn.file.tooltip"));
+
+        this.btnDigest.setActionCommand(MainViewController.CMD_DIGEST);
+        this.btnDigest.setIcon(new ImageIcon(this.IMAGE_HASHTAG.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnDigest.setText(this.messages.getString("btn.digest.text"));
+        this.btnDigest.setToolTipText(this.messages.getString("btn.digest.tooltip"));
+
+        this.btnEncode.setActionCommand(MainViewController.CMD_ENCODE);
+        this.btnEncode.setIcon(new ImageIcon(this.IMAGE_ENCODE.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnEncode.setText(this.messages.getString("btn.encode.text"));
+        this.btnEncode.setToolTipText(this.messages.getString("btn.encode.tooltip"));
+
+        this.btnCopySource.setActionCommand(MainViewController.CMD_COPY_SOURCE);
+        this.btnCopySource.setIcon(new ImageIcon(this.IMAGE_COPY.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnCopySource.setText(this.messages.getString("btn.copy.source.text"));
+        this.btnCopySource.setToolTipText(this.messages.getString("btn.copy.source.tooltip"));
+
+        this.btnCopyResult.setActionCommand(MainViewController.CMD_COPY_RESULT);
+        this.btnCopyResult.setIcon(new ImageIcon(this.IMAGE_COPY.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnCopyResult.setText(this.messages.getString("btn.copy.result.text"));
+        this.btnCopyResult.setToolTipText(this.messages.getString("btn.copy.result.tooltip"));
+
+        this.btnClSource.setActionCommand(MainViewController.CMD_CLEAR_SOURCE);
+        this.btnClSource.setIcon(new ImageIcon(this.IMAGE_ERASER.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnClSource.setText(this.messages.getString("btn.clear.source.text"));
+        this.btnClSource.setToolTipText(this.messages.getString("btn.clear.source.tooltip"));
+
+        this.btnClResult.setActionCommand(MainViewController.CMD_CLEAR_RESULT);
+        this.btnClResult.setIcon(new ImageIcon(this.IMAGE_ERASER.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        this.btnClResult.setText(this.messages.getString("btn.clear.result.text"));
+        this.btnClResult.setToolTipText(this.messages.getString("btn.clear.result.tooltip"));
+    }
+
+    /**
+     * Init listeners.
+     */
+    private void initListener() {
+        this.controller = new MainViewController(this);
+        this.chkFile.addActionListener(this.controller);
+        this.btnFileChooser.addActionListener(this.controller);
+        this.btnDigest.addActionListener(this.controller);
+        this.btnEncode.addActionListener(this.controller);
+        this.btnCopySource.addActionListener(this.controller);
+        this.btnCopyResult.addActionListener(this.controller);
+        this.btnClSource.addActionListener(this.controller);
+        this.btnClResult.addActionListener(this.controller);
+    }
+
+    public ResourceBundle getMessages() {
+        return messages;
+    }
+
+    public void setMessages(ResourceBundle messages) {
+        this.messages = messages;
+    }
+
     public JTextArea getTxtSource() {
         return txtSource;
     }
@@ -289,7 +399,7 @@ public class MainView extends javax.swing.JFrame {
     public JFileChooser getFcSource() {
         return fcSource;
     }
-    
+
     public JButton getBtnCopySource() {
         return btnCopySource;
     }
@@ -297,7 +407,7 @@ public class MainView extends javax.swing.JFrame {
     public JButton getBtnClSource() {
         return btnClSource;
     }
-    
+
     public JButton getBtnCopyResult() {
         return btnCopyResult;
     }
@@ -305,7 +415,7 @@ public class MainView extends javax.swing.JFrame {
     public JButton getBtnClResult() {
         return btnClResult;
     }
-    
+
     /**
      * @param args the command line arguments
      */

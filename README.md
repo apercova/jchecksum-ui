@@ -6,7 +6,7 @@
   
 ![main_view](https://raw.githubusercontent.com/apercova/imageio/master/jchecksum-ui/jchecksumui-01.png)
 
-### Installation:
+## Installation:
 > As prerequisite you have to have [jchecksum](https://github.com/apercova/jchecksum) installed at ```~/.m2``` local maven repository. See instructions [here](https://github.com/apercova/jchecksum)
 
 #### 1. Clone repository

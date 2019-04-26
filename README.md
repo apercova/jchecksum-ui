@@ -3,7 +3,8 @@
 
 > Uses QuickCLI to leverage CLI command configuration. Check it out [here](https://github.com/apercova/QuickCLI).  
 > Uses jchecksum as CLI back service for GUI. Check it out [here](https://github.com/apercova/jchecksum).  
-> ![main_view](https://raw.githubusercontent.com/apercova/imageio/master/jchecksum-ui/jchecksumui-01.png)
+  
+![main_view](https://raw.githubusercontent.com/apercova/imageio/master/jchecksum-ui/jchecksumui-01.png)
 
 ### Installation:
 > As prerequisite you have to have [jchecksum](https://github.com/apercova/jchecksum) installed at ```~/.m2``` local maven repository. See instructions [here](https://github.com/apercova/jchecksum)
